@@ -9,8 +9,18 @@ body{
 {    position: relative;
     background:#fff;
     color: black;
-    height: 200px;
-    width: 300px;
+    height: 400px;
+    width: 500px;
     border-radius: 30px;
     top: 10rem;
+    display: flex;
+    justify-content: center;
+    
+}
+#container #image
+{  position: absolute;
+    height: 100px;
+    width: 100px;
+    top: 20px;
+    
 }
