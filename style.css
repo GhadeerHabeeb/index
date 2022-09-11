@@ -78,13 +78,20 @@ body
   margin-top: 5px;
 }
 .note .buttom-content
-{ border-top:1px solid #575757;
- padding-top:10px ;
+{
+ padding-top: 10px ;
+  border-top:1px solid #ccc;
 }
-.note .buttom-content span{
+.buttom-content span{
   color: #575757;
   font-size: 14px;
 
+}
+
+.note .details
+{
+  max-height: 120px;
+  overflow-y: auto;
 }
 .buttom-content .setting
 {
@@ -110,7 +117,7 @@ body
  
   transition: transform 0.2s ease;
 }
-.setting:hover .menu
+.setting.show .menu
 {
   transform: scale(1);
 }
@@ -216,4 +223,5 @@ body
   outline: none;
   color: rgb(126, 124, 124);
   background: #b7f1f8;
+  cursor: pointer;
 }
