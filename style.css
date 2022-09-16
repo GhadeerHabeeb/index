@@ -225,3 +225,17 @@ body
   background: #b7f1f8;
   cursor: pointer;
 }
+
+.greeting
+{
+ width: 100%;
+ margin-top:10px ;
+  color: #fff;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.note.dragging
+{
+  opacity: 0.5;
+}

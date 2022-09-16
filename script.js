@@ -5,6 +5,8 @@ closeIcon=popupBox.querySelector("header i"),
 titleTag=popupBox.querySelector("input"),
 descTag=popupBox.querySelector("textarea"),
 addBtn=popupBox.querySelector("button");
+let greeting=document.querySelector(".greeting h1");
+console.log(greeting);
 
 
 
@@ -34,7 +36,7 @@ function showNotes()
 { 
     document.querySelectorAll(".note").forEach(note => note.remove());
     notes.forEach((note,index) => {
-         let liTag=`<li class="note">
+         let liTag=`<li class="note" draggable="true">
          <div class="details">
            <p>${note.title}</p>
            <span>${note.description}</span>
@@ -56,6 +58,8 @@ function showNotes()
              </li>
          `;
          addBox.insertAdjacentHTML("afterend",liTag);
+
+      
         
     });
 }
@@ -113,6 +117,7 @@ addBtn.addEventListener("click", e =>{
          {
             houre=houre-12;
             ampm="PM"
+           
 
          }
          houre=houre==0?houre=12:houre;
@@ -142,3 +147,71 @@ addBtn.addEventListener("click", e =>{
     }
    
 })
+
+function addGreeting()
+{
+  let dateObj=new Date();
+  let H=dateObj.getHours();
+  if(H>=12)
+  {
+    H=H-12;
+     greeting.innerText="Good Evening ☺️";
+
+  }
+  else{
+    greeting.innerText="Good Morning ☺️";
+
+  }
+    
+}
+addGreeting()
+
+const container=document.querySelectorAll(".wapper");
+document.querySelectorAll(".note").forEach(draggable =>{
+  draggable.addEventListener("dragstart",()=>{
+    draggable.classList.add("dragging")
+  })
+
+  draggable.addEventListener("dragend",()=>{
+    draggable.classList.remove("dragging")
+  })
+ })
+
+ container.forEach(container =>{
+  container.addEventListener("dragover", e =>{
+     e.preventDefault();
+     const afterElement=getDragAfterElement(container,e.clientY);
+   
+ 
+    const draggable=document.querySelector('.dragging');
+    if(afterElement==null)
+    {
+        container.appendChild(draggable)
+    }
+    else
+    {
+      container.insertBefore(draggable,afterElement)
+    }
+  
+
+    
+  })
+ })
+
+ function getDragAfterElement(container,y)
+ {
+ const draggableElement= [...container.querySelectorAll('.note:not(.dragging)')]
+ return draggableElement.reduce((closest,child)=>{
+  const box = child.getBoundingClientRect();
+  const offset= y - box.top - box.height / 2
+  
+  if(offset < 0 && offset > closest.offset)
+  {
+    return { offset:offset,element:child}
+  }
+  else{
+     return closest
+  }
+
+ },{offset: Number.NEGATIVE_INFINITY}).element;
+ }
